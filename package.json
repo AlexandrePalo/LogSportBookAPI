@@ -1,0 +1,22 @@
+{
+  "name": "logsportbook-api",
+  "version": "1.0.0",
+  "description": "Express js API for Log Sport Book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandrePalo/LogSportBookAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexandrePalo/LogSportBookAPI/issues"
+  },
+  "homepage": "https://github.com/AlexandrePalo/LogSportBookAPI#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
