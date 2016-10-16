@@ -16,22 +16,80 @@ var User = require('./models/user')
 
 router.route('/users')
 
-  // create a bear (accessed at POST http://localhost:8080/api/bears)
-  .post(function(req, res) {
+  .post(function (req, res) {
 
-      var user = new User()
-      user.first_name = req.body.first_name
-      user.last_name = req.body.last_name
-      user.email = req.body.email
-      user.password = req.body.password
+    var user = new User()
+    user.first_name = req.body.first_name
+    user.last_name = req.body.last_name
+    user.email = req.body.email
+    user.password = req.body.password
 
-      user.save(function(err) {
-          if (err)
-              res.send(err);
+    // Send the created user is better
+    // How to obtain the current id ?
+    user.save(function(err) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json({ message: 'User created!' })
+      }
+    })
 
-          res.json({ message: 'User created!' })
-      })
+  })
 
+  .get(function (req, res) {
+    User.find( function(err, users) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json(users)
+      }
+    })
+  })
+
+router.route('/users/:user_id')
+
+  .get(function (req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json(user)
+      }
+    })
+  })
+
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      if (err) {
+        res.send(err)
+      } else {
+        user.first_name = req.body.first_name
+
+        user.save(function (err) {
+          if (err) {
+            res.send(err)
+          } else {
+            res.json(user)
+          }
+        })
+      }
+    })
+  })
+
+  .delete(function (req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      if (err) {
+        res.send(err)
+      } else {
+        user.remove(function (err) {
+          if (err) {
+            res.send(err)
+          } else {
+            res.json({ message: 'deleted !'})
+          }
+        })
+      }
+    })
   })
 
 app.use('/api', router)
