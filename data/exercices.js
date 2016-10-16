@@ -28,12 +28,10 @@ const exercices = {
     'muscularGroup': 1
   },
   8: {
-    'id': 8,
     'name': 'Développé couché décliné',
     'muscularGroup': 1
   },
   9: {
-    'id': 9,
     'name': 'Dips',
     'muscularGroup': 1
   },
@@ -202,7 +200,6 @@ const exercices = {
     'muscularGroup': 3
   },
   51: {
-    'id': 51,
     'name': 'Presse à cuisse',
     'muscularGroup': 3
   },
