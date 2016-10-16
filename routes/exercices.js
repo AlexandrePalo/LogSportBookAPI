@@ -6,7 +6,7 @@ module.exports = function(app){
       res.json(exercices)
     })
     app.get('/exercices/:id', function(req, res) {
-      res.send('Exercice ' + req.params['id'])
+      res.json(exercices[req.params['id']])
     })
 
 
