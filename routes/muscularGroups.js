@@ -1,7 +1,9 @@
+var muscularGroups = require('../data/muscularGroups')
+
 module.exports = function(app){
 
     app.get('/musculargroups', function(req, res) {
-      res.send('List of muscular groups')
+      res.json(muscularGroups)
     })
     app.get('/musculargroups/:id', function(req, res) {
       res.send('Muscular group ' + req.params['id'])
