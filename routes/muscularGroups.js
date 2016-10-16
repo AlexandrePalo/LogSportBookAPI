@@ -6,7 +6,7 @@ module.exports = function(app){
       res.json(muscularGroups)
     })
     app.get('/musculargroups/:id', function(req, res) {
-      res.send('Muscular group ' + req.params['id'])
+      res.json(muscularGroups[req.params['id']])
     })
 
 
