@@ -18,5 +18,8 @@
   "homepage": "https://github.com/AlexandrePalo/LogSportBookAPI#readme",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "sqlite3": "^3.1.6"
   }
 }
