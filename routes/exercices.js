@@ -9,5 +9,4 @@ module.exports = function(app){
       res.json(exercices[req.params['id']])
     })
 
-
 }
