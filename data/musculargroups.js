@@ -1,4 +1,4 @@
-const musculargroups = {
+const muscularGroups = {
   1: {
     name: 'Ceinture scapulaire'
   },
@@ -16,4 +16,4 @@ const musculargroups = {
   }
 }
 
-module.exports = musculargroups
+module.exports = muscularGroups
