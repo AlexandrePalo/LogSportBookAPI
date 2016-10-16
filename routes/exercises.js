@@ -1,18 +1,18 @@
 var express = require('express')
 var router = express.Router()
 
-var MuscularGroup = require('../models/muscularGroup')
+var Exercise = require('../models/exercise')
 
 router.route('/')
 
   .post(function (req, res) {
 
-    var muscularGroup = new MuscularGroup()
-    muscularGroup.name = req.body.name
-
+    var exercise = new Exercise()
+    exercise.name = req.body.name
+    exercice.muscularGroup = req.body.muscularGroup
     // Send the created user is better
     // How to obtain the current id ?
-    muscularGroup.save(function(err) {
+    exercise.save(function(err) {
       if (err) {
         res.send(err)
       } else {
@@ -23,39 +23,39 @@ router.route('/')
   })
 
   .get(function (req, res) {
-    MuscularGroup.find( function(err, muscularGroups) {
+    Exercise.find( function(err, exercise) {
       if (err) {
         res.send(err)
       } else {
-        res.json(muscularGroups)
+        res.json(exercise)
       }
     })
   })
 
-router.route('/:muscularGroup_id')
+router.route('/:exercise_id')
 
   .get(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
+    Exercise.findById(req.params.exercise_id, function(err, exercise) {
       if (err) {
         res.send(err)
       } else {
-        res.json(muscularGroup)
+        res.json(exercise)
       }
     })
   })
 
   .put(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
+    Exercise.findById(req.params.exercise_id, function(err, exercise) {
       if (err) {
         res.send(err)
       } else {
-        muscularGroup.name = req.body.name
+        exercise.name = req.body.name
 
-        muscularGroup.save(function (err) {
+        exercise.save(function (err) {
           if (err) {
             res.send(err)
           } else {
-            res.json(muscularGroup)
+            res.json(exercise)
           }
         })
       }
@@ -63,11 +63,11 @@ router.route('/:muscularGroup_id')
   })
 
   .delete(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
+    Exercise.findById(req.params.exercise_id, function(err, exercise) {
       if (err) {
         res.send(err)
       } else {
-        muscularGroup.remove(function (err) {
+        exercise.remove(function (err) {
           if (err) {
             res.send(err)
           } else {

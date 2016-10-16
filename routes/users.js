@@ -19,7 +19,7 @@ router.route('/')
       if (err) {
         res.send(err)
       } else {
-        res.json({ message: 'User created!' })
+        res.json({ message: 'Created!' })
       }
     })
 
@@ -74,7 +74,7 @@ router.route('/:user_id')
           if (err) {
             res.send(err)
           } else {
-            res.json({ message: 'deleted !'})
+            res.json({ message: 'Deleted !'})
           }
         })
       }
