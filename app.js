@@ -1,5 +1,13 @@
 var express = require('express')
 var app = express()
+var bodyParser = require('body-parser')
+var mongoose = require('mongoose')
+
+// Database connection
+mongoose.connect('mongodb://admin:admin@ds059306.mlab.com:59306/logsportbookapi')
+
+// Testing schemas
+var Test = require('./models/test')
 
 // Route files
 require('./routes/users')(app)
