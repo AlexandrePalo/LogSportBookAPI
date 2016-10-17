@@ -1,18 +1,20 @@
 var express = require('express')
 var router = express.Router()
 
-var Exercise = require('../models/exercise')
+var Serie = require('../models/serie')
 
 router.route('/')
 
   .post(function (req, res) {
 
-    var exercise = new Exercise()
-    exercise.name = req.body.name
-    exercice.muscularGroup = req.body.muscularGroup
-    // Send the created user is better
+    var serie = new Serie()
+    serie.exerciseBlock = req.body.exerciseBlock
+    serie.index = req.body.index,
+    serie.repetition = req.body.repetition,
+    serie.load = req.body.load
+    // Send the created serie is better
     // How to obtain the current id ?
-    exercise.save(function(err) {
+    serie.save(function(err) {
       if (err) {
         res.send(err)
       } else {
@@ -23,40 +25,42 @@ router.route('/')
   })
 
   .get(function (req, res) {
-    Exercise.find( function(err, exercise) {
+    Serie.find( function(err, serie) {
       if (err) {
         res.send(err)
       } else {
-        res.json(exercise)
+        res.json(serie)
       }
     })
   })
 
-router.route('/:exercise_id')
+router.route('/:serie_id')
 
   .get(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
+    Serie.findById(req.params.serie_id, function(err, serie) {
       if (err) {
         res.send(err)
       } else {
-        res.json(exercise)
+        res.json(serie)
       }
     })
   })
 
   .put(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
+    Serie.findById(req.params.serie_id, function(err, serie) {
       if (err) {
         res.send(err)
       } else {
-        exercise.name = req.body.name
-        exercice.muscularGroup = req.body.muscularGroup
+        serie.exerciseBlock = req.body.exerciseBlock
+        serie.index = req.body.index,
+        serie.repetition = req.body.repetition,
+        serie.load = req.body.load
 
-        exercise.save(function (err) {
+        serie.save(function (err) {
           if (err) {
             res.send(err)
           } else {
-            res.json(exercise)
+            res.json(serie)
           }
         })
       }
@@ -64,11 +68,11 @@ router.route('/:exercise_id')
   })
 
   .delete(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
+    Serie.findById(req.params.serie_id, function(err, serie) {
       if (err) {
         res.send(err)
       } else {
-        exercise.remove(function (err) {
+        serie.remove(function (err) {
           if (err) {
             res.send(err)
           } else {

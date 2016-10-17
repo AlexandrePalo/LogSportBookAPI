@@ -53,6 +53,9 @@ router.route('/:user_id')
         res.send(err)
       } else {
         user.first_name = req.body.first_name
+        user.last_name = req.body.last_name
+        user.email = req.body.email
+        user.password = req.body.password
 
         user.save(function (err) {
           if (err) {
