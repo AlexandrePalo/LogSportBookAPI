@@ -7,7 +7,7 @@ router.route('/')
 
   .post(function (req, res) {
 
-    var training = new Exercise()
+    var training = new Training()
     training.description = req.body.description
     training.user = req.body.user
     training.place = req.body.place
