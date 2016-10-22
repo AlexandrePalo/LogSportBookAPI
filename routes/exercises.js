@@ -3,80 +3,16 @@ var router = express.Router()
 
 var Exercise = require('../models/exercise')
 
+var actionsExercises = require('../actions/exercises')
+
+// CRUD
 router.route('/')
-
-  .post(function (req, res) {
-
-    var exercise = new Exercise()
-    exercise.name = req.body.name
-    exercise.muscularGroup = req.body.muscularGroup
-    // Send the created user is better
-    // How to obtain the current id ?
-    exercise.save(function(err) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json({ message: 'Created!' })
-      }
-    })
-
-  })
-
-  .get(function (req, res) {
-    Exercise.find( function(err, exercise) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(exercise)
-      }
-    })
-  })
+  .post(function (req, res) { actionsExercises.create(req.body, res) })
+  .get(function (req, res) { actionsExercises.list(req.query, res) })
 
 router.route('/:exercise_id')
-
-  .get(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(exercise)
-      }
-    })
-  })
-
-  .put(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
-      if (err) {
-        res.send(err)
-      } else {
-        exercise.name = req.body.name
-        exercice.muscularGroup = req.body.muscularGroup
-
-        exercise.save(function (err) {
-          if (err) {
-            res.send(err)
-          } else {
-            res.json(exercise)
-          }
-        })
-      }
-    })
-  })
-
-  .delete(function (req, res) {
-    Exercise.findById(req.params.exercise_id, function(err, exercise) {
-      if (err) {
-        res.send(err)
-      } else {
-        exercise.remove(function (err) {
-          if (err) {
-            res.send(err)
-          } else {
-            res.json({ message: 'Deleted !'})
-          }
-        })
-      }
-    })
-  })
+  .get(function (req, res) { actionsExercises.retrieve(req.params.exercise_id, res) })
+  .put(function (req, res) { actionsExercises.update(req.params.exercise_id, req.body, res) })
+  .delete(function (req, res) { actionsExercises.remove(req.params.exercise_id, res) })
 
 module.exports = router
