@@ -6,6 +6,7 @@ var Training = require('../models/training')
 
 var actionsUsers = require('../actions/users')
 
+// CRUD
 router.route('/')
   .post(function (req, res) { actionsUsers.create(req.body, res) })
   .get(function (req, res) { actionsUsers.list(req.query, res) })
@@ -15,6 +16,7 @@ router.route('/:user_id')
   .put(function (req, res) { actionsUsers.update(req.params.user_id, req.body, res) })
   .delete(function (req, res) { actionsUsers.remove(req.params.user_id, res) })
 
+// SUB
 router.route('/:user_id/trainings')
 
   .get(function (req, res) {
