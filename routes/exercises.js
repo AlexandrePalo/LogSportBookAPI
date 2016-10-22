@@ -9,7 +9,7 @@ router.route('/')
 
     var exercise = new Exercise()
     exercise.name = req.body.name
-    exercice.muscularGroup = req.body.muscularGroup
+    exercise.muscularGroup = req.body.muscularGroup
     // Send the created user is better
     // How to obtain the current id ?
     exercise.save(function(err) {

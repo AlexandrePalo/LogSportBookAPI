@@ -1,13 +1,12 @@
-var ExerciseBlock = require('../models/exerciseBlock')
+var Serie = require('../models/serie')
 var _ = require('lodash')
 
-const create = function (exerciseBlock, res) {
-  var instance = new ExerciseBlock({
-    training: exerciseBlock.training,
-    exercise: exerciseBlock.exercise,
-    index: exerciseBlock.index,
-    date_begin: new Date(exerciseBlock.date_begin),
-    date_end: new Date(exerciseBlock.date_end)
+const create = function (serie, res) {
+  var instance = new Serie({
+    exerciseBlock: serie.exerciseBlock,
+    index: serie.index,
+    repetition: serie.repetition,
+    load: serie.load
   })
   instance.save(function(err) {
     if (err) {
@@ -19,7 +18,7 @@ const create = function (exerciseBlock, res) {
 }
 
 const list = function (query, res) {
-  ExerciseBlock.find(query, function(err, instances) {
+  Serie.find(query, function(err, instances) {
     if (err) {
       res.send(err)
     } else {
@@ -29,7 +28,7 @@ const list = function (query, res) {
 }
 
 const retrieve = function (query, res) {
-  ExerciseBlock.findOne(query, function(err, instance) {
+  Serie.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -39,12 +38,12 @@ const retrieve = function (query, res) {
 }
 
 const update = function (query, data, res) {
-  ExerciseBlock.findOne(query, function(err, instance) {
+  Serie.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
       for (var attr in data) {
-        if (_.includes(Object.keys(ExerciseBlock.schema.paths), attr)) {
+        if (_.includes(Object.keys(Serie.schema.paths), attr)) {
           instance[attr] = data[attr]
         }
       }
@@ -60,7 +59,7 @@ const update = function (query, data, res) {
 }
 
 const remove = function (query, res) {
-  ExerciseBlock.findOne(query, function(err, instance) {
+  Serie.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
