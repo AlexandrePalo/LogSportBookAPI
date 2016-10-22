@@ -8,6 +8,7 @@ var actionsUsers = require('../actions/users')
 var actionsTrainings = require('../actions/trainings')
 var actionsExerciseBlocks = require('../actions/exerciseBlocks')
 var actionsSeries = require('../actions/series')
+var actionsParameters = require('../actions/parameters')
 
 // CRUD USERS
 router.route('/')
@@ -17,6 +18,15 @@ router.route('/:user_id')
   .get(function (req, res) { actionsUsers.retrieve({ _id: req.params.user_id }, res) })
   .put(function (req, res) { actionsUsers.update({ _id: req.params.user_id }, req.body, res) })
   .delete(function (req, res) { actionsUsers.remove({ _id: req.params.user_id }, res) })
+
+// SUB PARAMETERS
+router.route('/:user_id/parameters')
+  .get(function (req, res) { actionsParameters.list(Object.assign(req.query, { user: req.params.user_id }), res) })
+  .post(function (req, res) { actionsParameters.create(Object.assign(req.body, { user: req.params.user_id }), res)})
+router.route('/:user_id/parameters/:parameter_id')
+  .get(function (req, res) { actionsParameters.retrieve({ user: req.params.user_id, _id: req.params.parameter_id }, res) })
+  .put(function (req, res) { actionsParameters.update({ user: req.params.user_id, _id: req.params.parameter_id }, req.body, res) })
+  .delete(function (req, res) { actionsParameters.remove({ user: req.params.user_id, _id: req.params.parameter_id }, res) })
 
 // SUB TRAININGS
 router.route('/:user_id/trainings')
