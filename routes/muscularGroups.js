@@ -3,79 +3,16 @@ var router = express.Router()
 
 var MuscularGroup = require('../models/muscularGroup')
 
+var actionsMuscularGroups = require('../actions/muscularGroups')
+
+// CRUD
 router.route('/')
-
-  .post(function (req, res) {
-
-    var muscularGroup = new MuscularGroup()
-    muscularGroup.name = req.body.name
-
-    // Send the created user is better
-    // How to obtain the current id ?
-    muscularGroup.save(function(err) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json({ message: 'Created!' })
-      }
-    })
-
-  })
-
-  .get(function (req, res) {
-    MuscularGroup.find( function(err, muscularGroups) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(muscularGroups)
-      }
-    })
-  })
+  .post(function (req, res) { actionsMuscularGroups.create(req.body, res) })
+  .get(function (req, res) { actionsMuscularGroups.list(req.query, res) })
 
 router.route('/:muscularGroup_id')
-
-  .get(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(muscularGroup)
-      }
-    })
-  })
-
-  .put(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
-      if (err) {
-        res.send(err)
-      } else {
-        muscularGroup.name = req.body.name
-
-        muscularGroup.save(function (err) {
-          if (err) {
-            res.send(err)
-          } else {
-            res.json(muscularGroup)
-          }
-        })
-      }
-    })
-  })
-
-  .delete(function (req, res) {
-    MuscularGroup.findById(req.params.muscularGroup_id, function(err, muscularGroup) {
-      if (err) {
-        res.send(err)
-      } else {
-        muscularGroup.remove(function (err) {
-          if (err) {
-            res.send(err)
-          } else {
-            res.json({ message: 'Deleted !'})
-          }
-        })
-      }
-    })
-  })
+  .get(function (req, res) { actionsMuscularGroups.retrieve(req.params.muscularGroup_id, res) })
+  .put(function (req, res) { actionsMuscularGroups.update(req.params.muscularGroup_id, req.body, res) })
+  .delete(function (req, res) { actionsMuscularGroups.remove(req.params.muscularGroup_id, res) })
 
 module.exports = router
