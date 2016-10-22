@@ -28,8 +28,8 @@ const list = function (query, res) {
   })
 }
 
-const retrieve = function (id, res) {
-  Training.findById(id, function(err, instance) {
+const retrieve = function (query, res) {
+  Training.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -38,8 +38,8 @@ const retrieve = function (id, res) {
   })
 }
 
-const update = function (id, data, res) {
-  Training.findById(id, function(err, instance) {
+const update = function (query, data, res) {
+  Training.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -59,8 +59,8 @@ const update = function (id, data, res) {
   })
 }
 
-const remove = function (id, res) {
-  Training.findById(id, function(err, instance) {
+const remove = function (query, res) {
+  Training.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {

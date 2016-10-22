@@ -15,5 +15,4 @@ router.route('/:training_id')
   .put(function (req, res) { actionsTrainings.update(req.params.training_id, req.body, res) })
   .delete(function (req, res) { actionsTrainings.remove(req.params.training_id, res) })
 
-
 module.exports = router
