@@ -1,12 +1,12 @@
-var ExerciceBlock = require('../models/exerciceBlock')
+var ExerciseBlock = require('../models/exerciseBlock')
 var _ = require('lodash')
 
-const create = function (exerciceBlock, res) {
-  var instance = new ExerciceBlock({
-    training: exerciceBlock.training,
-    index: exerciceBlock.index,
-    date_begin: new Date(exerciceBlock.date_begin),
-    date_end: new Date(exerciceBlock.date_end)
+const create = function (exerciseBlock, res) {
+  var instance = new ExerciseBlock({
+    training: exerciseBlock.training,
+    index: exerciseBlock.index,
+    date_begin: new Date(exerciseBlock.date_begin),
+    date_end: new Date(exerciseBlock.date_end)
   })
   instance.save(function(err) {
     if (err) {
@@ -18,7 +18,7 @@ const create = function (exerciceBlock, res) {
 }
 
 const list = function (query, res) {
-  ExerciceBlock.find(query, function(err, instances) {
+  ExerciseBlock.find(query, function(err, instances) {
     if (err) {
       res.send(err)
     } else {
@@ -28,7 +28,7 @@ const list = function (query, res) {
 }
 
 const retrieve = function (query, res) {
-  ExerciceBlock.findOne(query, function(err, instance) {
+  ExerciseBlock.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -38,12 +38,12 @@ const retrieve = function (query, res) {
 }
 
 const update = function (query, data, res) {
-  ExerciceBlock.findOne(query, function(err, instance) {
+  ExerciseBlock.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
       for (var attr in data) {
-        if (_.includes(Object.keys(ExerciceBlock.schema.paths), attr)) {
+        if (_.includes(Object.keys(ExerciseBlock.schema.paths), attr)) {
           instance[attr] = data[attr]
         }
       }
@@ -59,7 +59,7 @@ const update = function (query, data, res) {
 }
 
 const remove = function (query, res) {
-  ExerciceBlock.findOne(query, function(err, instance) {
+  ExerciseBlock.findOne(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
