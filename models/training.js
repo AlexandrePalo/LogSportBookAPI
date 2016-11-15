@@ -3,7 +3,7 @@ var Schema = mongoose.Schema
 
 var TrainingSchema = new Schema ({
   description: String,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  user: String,
   place: String,
   date_begin: Date,
   date_end: Date
