@@ -29,7 +29,7 @@ const list = function (query, res) {
 }
 
 const retrieve = function (query, res) {
-  Training.findOne(query, function(err, instance) {
+  Training.findById(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -39,7 +39,7 @@ const retrieve = function (query, res) {
 }
 
 const update = function (query, data, res) {
-  Training.findOne(query, function(err, instance) {
+  Training.findById(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
@@ -60,7 +60,7 @@ const update = function (query, data, res) {
 }
 
 const remove = function (query, res) {
-  Training.findOne(query, function(err, instance) {
+  Training.findById(query, function(err, instance) {
     if (err) {
       res.send(err)
     } else {
