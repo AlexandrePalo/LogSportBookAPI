@@ -25,7 +25,13 @@ const list = function (query, res) {
     if (err) {
       res.send(err)
     } else {
-      res.json(instances)
+      Training.populate(instances, { path: 'exerciseBlocks', model: 'ExerciseBlock'}, function(err, training) {
+          if (err) {
+            res.json(err)
+          } else {
+            res.json(training)
+          }
+      })
     }
   })
 }
@@ -36,11 +42,11 @@ const retrieve = function (query, res) {
   .populate({ path: 'exerciseBlocks', model: 'ExerciseBlock'})
   .exec(function (err, instance) {
     Training.populate(instance, { path: 'exerciseBlocks._exercise', model: 'Exercise' }, function(err, training) {
-          if (err) {
-            res.json(err)
-          } else {
-            res.json(training)
-          }
+        if (err) {
+          res.json(err)
+        } else {
+          res.json(training)
+        }
     })
   })
 }
