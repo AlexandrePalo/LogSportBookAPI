@@ -6,7 +6,8 @@ var TrainingSchema = new Schema ({
   user: String,
   place: String,
   date_begin: Date,
-  date_end: Date
+  date_end: Date,
+  exerciseBlocks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseBlock'}]
 })
 
 module.exports = mongoose.model('Training', TrainingSchema)

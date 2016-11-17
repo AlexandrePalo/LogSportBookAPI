@@ -1,10 +1,11 @@
 var ExerciseBlock = require('../models/exerciseBlock')
+var Training = require('../models/training')
 var _ = require('lodash')
 
 const create = function (exerciseBlock, res) {
   var instance = new ExerciseBlock({
-    training: exerciseBlock.training,
-    exercise: exerciseBlock.exercise,
+    _training: exerciseBlock.training,
+    _exercise: exerciseBlock.exercise,
     index: exerciseBlock.index,
     date_begin: new Date(exerciseBlock.date_begin),
     date_end: new Date(exerciseBlock.date_end)
@@ -12,8 +13,22 @@ const create = function (exerciseBlock, res) {
   instance.save(function(err) {
     if (err) {
       res.send(err)
+    }
+  })
+  Training
+  .findById(instance._training)
+  .exec(function (err, training) {
+    if (err) {
+      res.json(err)
     } else {
-      res.json(instance)
+      training.exerciseBlocks.push(instance._id)
+      training.save(function(err) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.json(instance)
+        }
+      })
     }
   })
 }
@@ -29,9 +44,12 @@ const list = function (query, res) {
 }
 
 const retrieve = function (query, res) {
-  ExerciseBlock.findById(query, function(err, instance) {
+  ExerciseBlock
+  .findById(query)
+  .populate('_exercise')
+  .exec(function (err, instance) {
     if (err) {
-      res.send(err)
+      res.json(err)
     } else {
       res.json(instance)
     }
