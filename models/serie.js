@@ -2,9 +2,9 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var SerieSchema = new Schema ({
-  exerciseBlock: { type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseBlock'},
+  _exerciseBlock: { type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseBlock'},
   index: Number,
-  repetition: Number,
+  repetitions: Number,
   load: Number
 })
 

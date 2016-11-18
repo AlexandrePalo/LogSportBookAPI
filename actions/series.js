@@ -3,9 +3,9 @@ var _ = require('lodash')
 
 const create = function (serie, res) {
   var instance = new Serie({
-    exerciseBlock: serie.exerciseBlock,
+    _exerciseBlock: serie._exerciseBlock,
     index: serie.index,
-    repetition: serie.repetition,
+    repetitions: serie.repetitions,
     load: serie.load
   })
   instance.save(function(err) {
@@ -18,6 +18,7 @@ const create = function (serie, res) {
 }
 
 const list = function (query, res) {
+  console.log(query)
   Serie.find(query, function(err, instances) {
     if (err) {
       res.send(err)
