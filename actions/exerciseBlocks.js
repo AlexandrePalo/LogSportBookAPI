@@ -26,7 +26,13 @@ const create = function (exerciseBlock, res) {
         if (err) {
           res.send(err)
         } else {
-          res.json(instance)
+          ExerciseBlock.populate(instance, { path: '_exercise', model: 'Exercise'}, function(err, exerciseBlock) {
+            if (err) {
+              res.send(err)
+            } else {
+              res.json(exerciseBlock)
+            }
+          })
         }
       })
     }

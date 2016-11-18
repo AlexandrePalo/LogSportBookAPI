@@ -18,7 +18,6 @@ const create = function (serie, res) {
 }
 
 const list = function (query, res) {
-  console.log(query)
   Serie.find(query, function(err, instances) {
     if (err) {
       res.send(err)
