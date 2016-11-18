@@ -1,4 +1,5 @@
 var Training = require('../models/training')
+var Exercise = require('../models/exercise')
 var ExerciseBlock = require('../models/exerciseBlock')
 var _ = require('lodash')
 
@@ -25,11 +26,17 @@ const list = function (query, res) {
     if (err) {
       res.send(err)
     } else {
-      Training.populate(instances, { path: 'exerciseBlocks', model: 'ExerciseBlock'}, function(err, training) {
+      Training.populate(instances, { path: 'exerciseBlocks', model: 'ExerciseBlock'}, function(err, trainings) {
           if (err) {
             res.json(err)
           } else {
-            res.json(training)
+            Exercise.populate(trainings, { path: 'exerciseBlocks._exercise', model: 'Exercise' }, function(err, training) {
+              if (err) {
+                res.json(err)
+              } else {
+                res.json(trainings)
+              }
+            })
           }
       })
     }
