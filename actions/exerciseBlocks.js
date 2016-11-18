@@ -4,8 +4,8 @@ var _ = require('lodash')
 
 const create = function (exerciseBlock, res) {
   var instance = new ExerciseBlock({
-    _training: exerciseBlock.training,
-    _exercise: exerciseBlock.exercise,
+    _training: exerciseBlock._training,
+    _exercise: exerciseBlock._exercise,
     index: exerciseBlock.index,
     date_begin: new Date(exerciseBlock.date_begin),
     date_end: new Date(exerciseBlock.date_end)
