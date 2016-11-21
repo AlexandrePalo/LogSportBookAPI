@@ -22,7 +22,11 @@ const create = function (training, res) {
 }
 
 const list = function (query, res) {
-  Training.find(query, function(err, instances) {
+  Training
+  .find(Object.assign({}, {'description' : new RegExp(query.search, 'i')}, _.omit(query, ['search', 'limit', 'order'])))
+  .limit(query.limit && Number(query.limit))
+  .sort(query.order ? query.order : 'date_begin')
+  .exec(function(err, instances) {
     if (err) {
       res.send(err)
     } else {
