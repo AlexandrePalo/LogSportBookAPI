@@ -22,8 +22,24 @@ const create = function (training, res) {
 }
 
 const list = function (query, res) {
+  let builtQuery = Object.assign(
+    {},
+    {
+      $or: [
+        {'description': new RegExp(query.search, 'i')},
+        {'place': new RegExp(query.search, 'i')}
+      ]
+    },
+    _.omit(query, ['search', 'limit', 'order', 'from', 'to'])
+  )
+  query.from && (builtQuery['date_end'] = { $gte: new Date(query.from)})
+  query.to && (builtQuery['date_end'] = Object.assign({}, builtQuery['date_end'],
+    { $lte: new Date(query.to) }
+  ))
+
+  console.log(builtQuery)
   Training
-  .find(Object.assign({}, {'description' : new RegExp(query.search, 'i')}, _.omit(query, ['search', 'limit', 'order'])))
+  .find(builtQuery)
   .limit(query.limit && Number(query.limit))
   .sort(query.order ? query.order : 'date_begin')
   .exec(function(err, instances) {
