@@ -36,12 +36,10 @@ const list = function (query, res) {
   query.to && (builtQuery['date_end'] = Object.assign({}, builtQuery['date_end'],
     { $lte: new Date(query.to) }
   ))
-
-  console.log(builtQuery)
   Training
   .find(builtQuery)
   .limit(query.limit && Number(query.limit))
-  .sort(query.order ? query.order : 'date_begin')
+  .sort(query.order ? query.order : '-date_end')
   .exec(function(err, instances) {
     if (err) {
       res.send(err)
