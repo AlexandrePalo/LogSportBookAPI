@@ -8,7 +8,8 @@ const create = function (exerciseBlock, res) {
     _exercise: exerciseBlock._exercise,
     index: exerciseBlock.index,
     date_begin: new Date(exerciseBlock.date_begin),
-    date_end: new Date(exerciseBlock.date_end)
+    date_end: new Date(exerciseBlock.date_end),
+    series: []
   })
   instance.save(function(err) {
     if (err) {
@@ -88,6 +89,22 @@ const remove = function (query, res) {
     if (err) {
       res.send(err)
     } else {
+      Training
+      .findById(instance._training)
+      .exec(function(err, training) {
+        if (err) {
+          res.send(err)
+        } else {
+          var index = training.exerciseBlocks.indexOf(instance._id)
+          return training.exerciseBlocks.slice(0, index).concat(training.exerciseBlocks.slice(index + 1))
+          training.save(function(err, e) {
+            if (err) {
+              res.send(err)
+            }
+          })
+        }
+      })
+
       instance.remove(function (err) {
         if (err) {
           res.send(err)

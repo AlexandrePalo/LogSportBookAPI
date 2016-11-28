@@ -1,6 +1,7 @@
 var Training = require('../models/training')
 var Exercise = require('../models/exercise')
 var ExerciseBlock = require('../models/exerciseBlock')
+var Serie = require('../models/serie')
 var _ = require('lodash')
 
 const create = function (training, res) {
@@ -44,15 +45,20 @@ const list = function (query, res) {
     if (err) {
       res.send(err)
     } else {
-      Training.populate(instances, { path: 'exerciseBlocks', model: 'ExerciseBlock'}, function(err, trainings) {
+      Training.populate(instances, { path: 'exerciseBlocks', model: 'ExerciseBlock'}, function(err, subInstance) {
           if (err) {
             res.json(err)
           } else {
-            Exercise.populate(trainings, { path: 'exerciseBlocks._exercise', model: 'Exercise' }, function(err, training) {
+            Exercise.populate(subInstance, { path: 'exerciseBlocks._exercise', model: 'Exercise' }, function(err, subInstance2) {
+              if (err) {
+                res.json(err)
+              }
+            })
+            Serie.populate(subInstance, { path: 'exerciseBlocks.series', model: 'Serie'}, function(err, subInstance3) {
               if (err) {
                 res.json(err)
               } else {
-                res.json(trainings)
+                res.json(subInstance3)
               }
             })
           }

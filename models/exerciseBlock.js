@@ -6,7 +6,8 @@ var ExerciseBlockSchema = new Schema ({
   _exercise: { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},
   index: Number,
   date_begin: Date,
-  date_end: Date
+  date_end: Date,
+  series: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Serie'}]
 })
 
 module.exports = mongoose.model('ExerciseBlock', ExerciseBlockSchema)
