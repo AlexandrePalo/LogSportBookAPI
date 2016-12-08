@@ -22,14 +22,12 @@ var routerExercises = require('./routes/exercises')
 var routerExerciseBlocks = require('./routes/exerciseBlocks')
 var routerTrainings = require('./routes/trainings')
 var routerSeries = require('./routes/series')
-var routerParameters = require('./routes/parameters')
 app.use('/users', routerUsers)
 app.use('/muscularGroups', routerMuscularGroups)
 app.use('/exercises', routerExercises)
 app.use('/exerciseBlocks', routerExerciseBlocks)
 app.use('/trainings', routerTrainings)
 app.use('/series', routerSeries)
-app.use('/parameters', routerParameters)
 
 // Listening
 app.listen(3000, function () {
